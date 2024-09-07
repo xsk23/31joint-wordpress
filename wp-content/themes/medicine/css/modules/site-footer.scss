@@ -1,0 +1,118 @@
+#ICP {  
+  text-align: center; /* 文本居中 */  
+  background-color: #f0f0f0; /* 灰色背景，这里使用的是浅灰色，您可以根据需要调整颜色值 */  
+  padding: 10px 0; /* 上下内边距，根据需要调整 */  
+  font-size: 16px; /* 字体大小，根据需要调整 */  
+  color: #999; /* 字体颜色，可根据需要调整 */  
+  width: 100%; /* 宽度设置为100%，确保div占据整行 */  
+  margin-top: 20px; /* 上外边距，根据需要调整 */  
+  margin-bottom: 20px; /* 下外边距，根据需要调整 */  
+}  
+#ICP a {  
+  text-decoration: none; /* 去除链接下划线 */  
+  color: inherit; /* 链接颜色继承父元素的字体颜色 */  
+}  
+#ICP a:hover {  
+  text-decoration: underline; /* 鼠标悬停时显示下划线 */  
+} 
+
+.gongzhonghao-img{
+  width: 100px;
+  height: 100px;
+  margin-top: 10px;
+  
+  @include atMedium {  
+    width: 150px;
+    height: 150px;
+    margin-top: 0px;
+    float:right;
+  }
+}
+
+.site-footer-nav-list a{
+  font-size: 10px;
+  @include atMedium {  
+    font-size: 12px;
+  }
+}
+
+
+.site-footer {
+  //font-size: 12px;
+  padding-bottom: 10px;
+  //padding: 2rem 0 3.5rem 0;
+  background-image: linear-gradient(#fff, #ececec);
+  
+  p {
+    font-size: 0.9rem;
+  }
+
+  .headline {
+    color: #666;
+    margin-bottom: 0.33rem;
+  }
+
+  &__link {
+    color: #999;
+    text-decoration: none;
+  }
+
+  &__link:hover {
+    color: $mainBlue;
+    text-decoration: underline;
+  }
+
+  &__inner {
+    border-top: 1px dotted #dedede;
+    padding-top: 1.5rem;
+  }
+
+  &__col-one {
+    //flex-wrap: wrap;
+    text-align: center;
+    width: 100%;
+    @include atMedium {
+      //float: right;
+      text-align: center;
+      width: 33%;
+      
+    }
+  }
+
+  &__col-two-three-group {
+    text-align: center;
+    width: 85%;
+    margin: 0 auto;
+    @include atMedium {
+      margin-top: 12px;
+      text-align: center;
+      //float: left;
+      width: 42%;
+      //margin: 0;
+    }
+  }
+
+  &__col-two {
+    width: 40%;
+    float: left;
+  }
+  &__col-three {
+    width: 60%;
+    float: left;
+  }
+  &__col-four {
+    padding-top: 20px;
+    width: 85%;
+    margin: 0 auto;
+    clear: both;
+    text-align: center;
+    @include atMedium {
+      padding-top: 0;
+      margin: 0;
+      clear: none;
+      text-align: left;
+      width: 25%;
+      float: right;
+    }
+  }
+}

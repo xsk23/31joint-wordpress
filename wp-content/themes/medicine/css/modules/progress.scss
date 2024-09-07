@@ -1,0 +1,43 @@
+.progress-container {  
+    position: absolute;  
+    width: 100px; /* 根据需要调整 */  
+    height: 100px; /* 根据需要调整 */  
+    display: none;  
+    justify-content: center;  
+    align-items: center;  
+}  
+  
+.progress {  
+    // --progress: 0%;  
+    // --last: 100%;  
+    width: 50px;  
+    height: 50px;  
+    background: conic-gradient(green 0%, #f1f1f1 0%);  
+    border-radius: 50%;  
+    position: absolute;  
+    top: 25px;  
+    left: 25px;  
+    transition: opacity 0.3s; /* 可选，用于平滑显示 */  
+}  
+  
+.progress::before {  
+    content: attr(data-progress) '%';  
+    position: absolute;  
+    inset: 5px;  
+    background-color: #fff;  
+    width: calc(100% - 10px);  
+    height: calc(100% - 10px);  
+    text-align: center;  
+    line-height: 40px;  
+    font-size: 15px;  
+    color: #333;  
+    border-radius: 50%;  
+}  
+  
+/* 可选：为按钮添加一些样式 */  
+#progressButton {  
+    position: relative;  
+    z-index: 1; /* 确保按钮在进度条之上 */  
+    padding: 10px 20px;  
+    cursor: pointer;  
+}
