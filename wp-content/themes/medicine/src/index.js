@@ -10,6 +10,7 @@ import Question from "./modules/Questiton"
 import NewNotice from "./modules/newNotice"
 import ViewingHistory from "./modules/viewingHistory"
 import Text from "./modules/text"
+import RegisterWithPhoneNumber from "./modules/login-phone"
 
 // Instantiate a new object using our modules/classes
 const mobileMenu = new MobileMenu()
@@ -21,3 +22,4 @@ const question = new Question();
 const newnotice = new NewNotice();
 const viewinghistory = new ViewingHistory();
 const text = new Text();
+const registerWithPhoneNumber = new RegisterWithPhoneNumber();

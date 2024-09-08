@@ -466,7 +466,25 @@ add_filter('upload_mimes','add_upload_mimes');
 
 // 短代码函数
 function send_sms_function() {
-    // 原始发送短信代码
+    $phone_number = sanitize_text_field($_POST['register_phoneNo']);
+    // 使用 WP_User_Query 检查是否有相同的手机号
+    // 检查是否有用户名与手机号匹配
+    $user = get_user_by('login', $phone_number);
+    // 如果找到用户，返回存在的结果
+    if ($user) {
+        wp_send_json_error(array('message' => '手机号已被注册！'));
+        return;
+    }
+    $password = sanitize_text_field($_POST['register_password']);
+    $phone_prefix = sanitize_text_field($_POST['phone_prefix']);
+    // 生成随机六位数验证码，每一位都是0-9的随机数
+    $verification_code = '';
+    for ($i = 0; $i < 6; $i++) {
+        $verification_code .= rand(0, 9);
+    }
+    // 将验证码存储在数据库中
+    update_option('temporary_verification_code', $verification_code);
+
     function sign($key, $msg) {
         return hash_hmac("sha256", $msg, $key, true);
     }
@@ -480,8 +498,17 @@ function send_sms_function() {
     $req_region = "ap-beijing";
     $version = "2021-01-11";
     $action = "SendSms";
-    $payload = "{\"PhoneNumberSet\":[\"+85260975828\"],\"SmsSdkAppId\":\"1400932896\",\"TemplateId\":\"2259975\",\"TemplateParamSet\":[\"123432\"]}";
-    $params = json_decode($payload);
+    // 将手机号加上前缀 +852
+    $phone_number_with_prefix = "{$phone_prefix}{$phone_number}";
+    // Build payload with user phone number
+    $payload = json_encode([
+        "PhoneNumberSet" => [$phone_number_with_prefix],
+        "SmsSdkAppId" => "1400932896",
+        "TemplateId" => "2259975",
+        "TemplateParamSet" => [$verification_code] // 将验证码作为模板参数
+    ]); 
+    // $payload = "{\"PhoneNumberSet\":[\"+85260975828\"],\"SmsSdkAppId\":\"1400932896\",\"TemplateId\":\"2259975\",\"TemplateParamSet\":[\"123432\"]}";
+    // $params = json_decode($payload);
     $endpoint = "https://sms.tencentcloudapi.com";
     $algorithm = "TC3-HMAC-SHA256";
     $timestamp = time();
@@ -536,15 +563,72 @@ function send_sms_function() {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
         curl_close($ch);
-
+        // 发送带有验证码的JSON响应
+        $response_data = array(
+            'status' => 'success',
+            'message' => '验证码已发送！',
+            'phone_number' => $phone_number,
+            'password' => $password,
+            'verification_code' => $verification_code, // 将验证码添加到响应中
+            'phone_prefix'  => $phone_prefix,
+        );
+        wp_send_json_success($response_data); // Send JSON response
         return $response;  // 返回响应
     } catch (Exception $err) {
-        return $err->getMessage();  // 返回错误信息
+        wp_send_json_error($err->getMessage());
+        // return $err->getMessage();  // 返回错误信息
+    }
+
+}
+add_action('wp_ajax_send_sms', 'send_sms_function');
+add_action('wp_ajax_nopriv_send_sms', 'send_sms_function');
+
+
+
+function verify_code_function() {
+    $phone_number = sanitize_text_field($_POST['register_phoneNo']);
+    $password = sanitize_text_field($_POST['register_password']);
+    $user_code = sanitize_text_field($_POST['verify_phone_key']);
+
+    // 假设你有存储验证码的机制，例如数据库
+    // 这里假设验证码存储在一个临时的选项中
+    $stored_code = get_option('temporary_verification_code'); 
+
+    if ($user_code === $stored_code) {
+        // 验证成功，执行注册逻辑
+        // 例如保存用户信息，清除验证码等
+        delete_option('temporary_verification_code'); // 清除验证码
+        // 创建新用户信息数组
+        $user_data = array(
+            'user_login'    => $phone_number,        // 用户名
+            'user_pass'     => $password,     // 密码
+            'user_email'    => "{$phone_number}@phone.com", // 电子邮件
+            'role'          => 'subscriber',           // 用户角色（可以是 'administrator', 'editor', 'author', 'contributor', 'subscriber' 等）
+
+        );
+        // 插入新用户
+        $user_id = wp_insert_user($user_data);
+        if (is_wp_error($user_id)) {
+            $error_message = $user_id->get_error_message(); // 获取详细的错误信息
+            wp_send_json_error('创建用户失败: ' . $error_message); // 返回错误信息
+
+        } else {
+            // echo '用户创建成功，用户ID为: ' . $user_id;
+            wp_send_json([
+                'status' => 'success',
+                'message' => '注册成功！'
+            ]);
+        }
+        
+        
+
+    } else {
+        wp_send_json_error('验证码不正确');
     }
 }
 
-// 注册短代码
-add_shortcode('send_sms', 'send_sms_function');
+add_action('wp_ajax_verify_code', 'verify_code_function');
+add_action('wp_ajax_nopriv_verify_code', 'verify_code_function');
 
 
 ?>

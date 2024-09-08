@@ -1,0 +1,99 @@
+#phone-verify-code-notice{
+    color: red;
+}
+
+
+#user_login_phoneNo{
+    background-color: transparent; /* 初始背景颜色为透明 */
+    // border-color: #ccc; /* 初始边框颜色 */
+}
+
+/* 确保页面全屏并居中对齐表单 */
+.register-body, .register-phone-html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f7f7;
+}
+
+form#registerform-phoneNumber,form#phone-number-verify-form{
+    max-width: 600px;
+    min-width: 400px;
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+form#registerform-phoneNumber p,form#phone-number-verify-form p {
+    margin-bottom: 15px;
+}
+
+form#registerform-phoneNumber label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form#registerform-phoneNumber input.input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+form#registerform-phoneNumber .phone-prefix {
+    display: flex;
+    align-items: center;
+}
+
+form#registerform-phoneNumber select.phone-prefix-select {
+    width: 80px; /* 选择框宽度 */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    margin-right: -1px; /* 消除与输入框之间的间距 */
+}
+
+form#registerform-phoneNumber input.phone-input {
+    flex: 1; /* 输入框占满剩余空间 */
+    border-radius: 0 4px 4px 0;
+}
+
+form#registerform-phoneNumber span {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: #0073aa;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.submit-phone input,.submit-verification input{
+    width: 100%;
+    padding: 10px;
+    background-color: #0073aa;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-phone input:hover,.submit-verification input:hover {
+    background-color: #005f8d;
+}
+
+@media (min-width: 450px) { 
+    form#registerform-phoneNumber {
+        padding: 10px;
+    }
+    form#registerform-phoneNumber span {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    .submit-phone input,.submit-verification input {
+        padding: 8px;
+    }
+}
