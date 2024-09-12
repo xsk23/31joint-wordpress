@@ -5,6 +5,45 @@ pageBanner(array(
   'subtitle'=>'政策文件都在这啦',
 ));
 ?>
+<style>
+.progress-container,.progress-circle-container {  
+    position: absolute;  
+    width: 100px; /* 根据需要调整 */  
+    height: 100px; /* 根据需要调整 */  
+    display: none;  
+    justify-content: center;  
+    align-items: center;  
+}  
+.progress {  
+    width: 50px;  
+    height: 50px;  
+    background: conic-gradient(green 0%, #f1f1f1 0%);  
+    border-radius: 50%;  
+    position: absolute;  
+    transition: opacity 0.3s; /* 可选，用于平滑显示 */  
+}  
+.progress::before {  
+    content: attr(data-progress) '%';  
+    position: absolute;  
+    inset: 5px;  
+    background-color: #fff;  
+    width: calc(100% - 10px);  
+    height: calc(100% - 10px);  
+    text-align: center;  
+    line-height: 40px;  
+    font-size: 15px;  
+    color: #333;  
+    border-radius: 50%;  
+}  
+/* 可选：为按钮添加一些样式 */  
+#progressButton {  
+    position: relative;  
+    z-index: 1; /* 确保按钮在进度条之上 */  
+    padding: 10px 20px;  
+    cursor: pointer;  
+}
+</style>
+
 <div class="container container--narrow page-section">
 <?php 
     if(is_user_logged_in()){
@@ -18,7 +57,7 @@ pageBanner(array(
                     <input class="new-file" type="file" name="upload-policy[]" multiple>
                     <span id="submit-policy-btn" class="submit-note" value="uploaded-file">提交</span>                    
                     <div class="progress-and-btn-container">
-                        <div class="progress-container">
+                        <div class="progress-circle-container">
                             <div class="progress" data-progress="0"></div>
                         </div>  
                         <input id="upload-policy-btn" class="upload-policy-hide" type="submit" value="上传">  

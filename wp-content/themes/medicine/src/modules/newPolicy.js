@@ -139,13 +139,13 @@ class NewPolicy{
 
     circular_progress(){
         $("#submit-policy-btn").addClass("upload-policy-hide");
-        $(".progress-container").css("display","block");
+        $(".progress-circle-container").css("display","block");
         this.progress = 0;
         const progressElement = $('.progress').get(0); // 获取原生 DOM 元素
         const interval = setInterval(function() {  
             if (this.progress >= 100) {  
                 clearInterval(interval); // 停止定时器  
-                $(".progress-container").css("display","none");
+                $(".progress-circle-container").css("display","none");
                 $("#upload-policy-btn").removeClass("upload-policy-hide");
                 $(".note-limit-message").addClass("active");
             } else {  

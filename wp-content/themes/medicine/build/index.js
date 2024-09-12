@@ -574,13 +574,13 @@ class NewNotice {
   //圆形进度条
   circular_progress() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()("#submit-notice-btn").addClass("upload-notice-hide");
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".progress-container").css("display", "block");
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".progress-circle-container").css("display", "block");
     this.progress = 0;
     const progressElement = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.progress').get(0); // 获取原生 DOM 元素
     const interval = setInterval(function () {
       if (this.progress >= 100) {
         clearInterval(interval); // 停止定时器  
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(".progress-container").css("display", "none");
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(".progress-circle-container").css("display", "none");
         jquery__WEBPACK_IMPORTED_MODULE_0___default()("#upload-notice-btn").removeClass("upload-notice-hide");
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(".notice-limit-message").addClass("active");
       } else {
@@ -900,13 +900,13 @@ class NewPolicy {
   }
   circular_progress() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()("#submit-policy-btn").addClass("upload-policy-hide");
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".progress-container").css("display", "block");
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".progress-circle-container").css("display", "block");
     this.progress = 0;
     const progressElement = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.progress').get(0); // 获取原生 DOM 元素
     const interval = setInterval(function () {
       if (this.progress >= 100) {
         clearInterval(interval); // 停止定时器  
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(".progress-container").css("display", "none");
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(".progress-circle-container").css("display", "none");
         jquery__WEBPACK_IMPORTED_MODULE_0___default()("#upload-policy-btn").removeClass("upload-policy-hide");
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(".note-limit-message").addClass("active");
       } else {
@@ -1438,7 +1438,7 @@ class smartSearch {
       this.noRedirect();
       let searchTerm = this.searchField.val();
       //用完就立刻重置，免得出现奇怪的bug，例如多次进入if函数 :(
-      let url = 'http://101.42.183.176:51114/ask/?question=' + searchTerm;
+      let url = 'https://xushikun.site/ask/?question=' + searchTerm;
       this.searched_question = searchTerm;
       //提交问题
       jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
@@ -1473,7 +1473,7 @@ class smartSearch {
   //获取答案
   retrieveAns() {
     if (this.status == 'Processing') {
-      let answer_url = 'http://101.42.183.176:51114/retrieve/?id=' + this.ans_id;
+      let answer_url = 'https://xushikun.site/retrieve/?id=' + this.ans_id;
       jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
         url: answer_url,
         // 完整的URL，包括查询参数  

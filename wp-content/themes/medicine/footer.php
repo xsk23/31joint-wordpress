@@ -19,7 +19,7 @@
               <h3 class="headline headline--small site-footer-nav-list">相关链接</h3>
               <nav class="nav-list site-footer-nav-list">                
                 <ul>
-                  <li><a target="_blank" href="http://www.nhsa.gov.cn/">国家医保局</a></li>
+                  <li><a target="_blank" href="https://www.nhsa.gov.cn/">国家医保局</a></li>
                   <li><a target="_blank" href="https://ybj.beijing.gov.cn/">北京市医疗保障局</a></li>     
                   <li><a target="_blank" href="https://www.beijing.gov.cn/">首都之窗</a></li>
                   <li><a target="_blank" href="<?php echo get_template_directory_uri().'/images/westMedQRcode.jpg';?>">北京市西城区医疗保障局微信公众号</a></l>

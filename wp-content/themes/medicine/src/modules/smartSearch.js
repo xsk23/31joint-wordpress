@@ -121,7 +121,7 @@ class smartSearch{
             this.noRedirect();
             let searchTerm = this.searchField.val(); 
             //用完就立刻重置，免得出现奇怪的bug，例如多次进入if函数 :(
-            let url = 'http://101.42.183.176:51114/ask/?question='+searchTerm;  
+            let url = 'https://xushikun.site/ask/?question='+searchTerm;  
             this.searched_question=searchTerm;
             //提交问题
             $.ajax({  
@@ -153,7 +153,7 @@ class smartSearch{
     //获取答案
     retrieveAns(){
         if(this.status=='Processing'){  
-            let answer_url = 'http://101.42.183.176:51114/retrieve/?id='+this.ans_id;  
+            let answer_url = 'https://xushikun.site/retrieve/?id='+this.ans_id;  
             $.ajax({  
                 url: answer_url, // 完整的URL，包括查询参数  
                 type: 'GET', // 请求类型：GET  

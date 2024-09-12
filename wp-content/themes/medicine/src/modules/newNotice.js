@@ -154,13 +154,13 @@ class NewNotice{
     //圆形进度条
     circular_progress(){
         $("#submit-notice-btn").addClass("upload-notice-hide");
-        $(".progress-container").css("display","block");
+        $(".progress-circle-container").css("display","block");
         this.progress = 0;
         const progressElement = $('.progress').get(0); // 获取原生 DOM 元素
         const interval = setInterval(function() {  
             if (this.progress >= 100) {  
                 clearInterval(interval); // 停止定时器  
-                $(".progress-container").css("display","none");
+                $(".progress-circle-container").css("display","none");
                 $("#upload-notice-btn").removeClass("upload-notice-hide");
                 $(".notice-limit-message").addClass("active");
             } else {  
